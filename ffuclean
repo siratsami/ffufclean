@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for dup in $(cat $1 | awk -F'Lines: ' '{print $2}' | awk -F', ' '{print $1}' | uniq --count | sort -rn | head -n 1 | awk -F' ' '{print $2}'); do cat $1 | grep -v "Lines: "$dup"";  done
+
+# this script recognizes duplicates based on their line number
+# you can automate this script to clean all your ffuf outputs with this command:
+# for a in $(ls | sort -u); do ffufclean $a && echo "TARGET: "$a""; done
